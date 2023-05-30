@@ -19,5 +19,6 @@ from django.urls import path,include
 from . import views
 urlpatterns = [
     path('staff/',views.staffpageload),
-    path('departments/',views.departmentspageload)
+    path('departments/',views.departmentspageload),
+    path('departments/<int:id>/',views.dept_detailpageload)
 ]

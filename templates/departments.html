@@ -50,24 +50,16 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Department cards here -->
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <h3 class="text-xl font-bold mb-4">Cardiology</h3>
-        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis odio ut felis efficitur fermentum. Ut ullamcorper enim ac nisi egestas, a malesuada urna feugiat. Mauris vel tincidunt ante.</p>
-        <p class="text-gray-700 mt-4">Department Head: Dr. John Doe</p>
-        <p class="text-gray-700">Contact: (123) 456-7890</p>
-      </div>
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <h3 class="text-xl font-bold mb-4">Neurology</h3>
-        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis odio ut felis efficitur fermentum. Ut ullamcorper enim ac nisi egestas, a malesuada urna feugiat. Mauris vel tincidunt ante.</p>
-        <p class="text-gray-700 mt-4">Department Head: Dr. Jane Smith</p>
-        <p class="text-gray-700">Contact: (123) 456-7890</p>
-      </div>
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <h3 class="text-xl font-bold mb-4">Pediatrics</h3>
-        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis odio ut felis efficitur fermentum. Ut ullamcorper enim ac nisi egestas, a malesuada urna feugiat. Mauris vel tincidunt ante.</p>
-        <p class="text-gray-700 mt-4">Department Head: Dr. Emily Johnson</p>
-        <p class="text-gray-700">Contact: (123) 456-7890</p>
-      </div>
+      {% for department in departments %}
+      <a href="/data/departments/{{department.id}}/">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-4">{{department.dept_name}}</h3>
+          <p class="text-gray-700">{{department.dept_description}}</p>
+          <p class="text-gray-700 mt-4">Department Head: {{department.dept_head_name}}</p>
+          <p class="text-gray-700">Contact: {{department.dept_contact}}</p>
+        </div>
+      </a>
+      {% endfor %}
     </div>
   </div>
   <script>
@@ -83,7 +75,7 @@
     var searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', function () {
       var searchValue = searchInput.value.toLowerCase();
-      var departmentCards = document.querySelectorAll('.grid > div');
+      var departmentCards = document.querySelectorAll('.grid > a > div');
       departmentCards.forEach(function (card) {
         var departmentName = card.querySelector('h3').textContent.toLowerCase();
         if (departmentName.includes(searchValue)) {
